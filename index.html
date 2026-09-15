@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elena y Moisés · 17 de julio de 2027</title>
+<meta name="description" content="Invitación a la boda de Elena y Moisés">
+<meta property="og:title" content="Elena y Moisés se casan">
+<meta property="og:description" content="Sábado 17 de julio de 2027 · Pozuelo de Alarcón y Guadarrama">
+<meta name="theme-color" content="#1F3A33">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pino:#1F3A33;      /* verde pino de la sierra */
+    --pino-2:#2E5247;
+    --granito:#EEF0EA;   /* piedra clara */
+    --lago:#6F8F98;      /* azul del lago */
+    --heno:#C8A951;      /* hierba seca de julio */
+    --tinta:#1B2521;
+    --linea:rgba(31,58,51,.18);
+    --display:"Marcellus", Georgia, serif;
+    --texto:"Figtree", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--texto);color:var(--tinta);background:var(--granito);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer}
+  :focus-visible{outline:2px solid var(--heno);outline-offset:3px;border-radius:4px}
+
+  /* ---------- Sobre ---------- */
+  .sobre{position:fixed;inset:0;z-index:10;background:var(--pino);color:var(--granito);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;transition:opacity .7s ease, visibility .7s}
+  .sobre.abierto{opacity:0;visibility:hidden}
+  .sobre p.para{font-size:.95rem;opacity:.75;margin-bottom:.4rem}
+  .sobre h1{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,9vw,3.4rem);line-height:1.1;margin-bottom:2.6rem}
+  .sello{width:132px;height:132px;border-radius:50%;border:none;background:radial-gradient(circle at 35% 30%,#d9bd6a,var(--heno) 55%,#9c8038);color:var(--pino);font-family:var(--display);font-size:2.1rem;display:grid;place-items:center;box-shadow:0 0 0 6px rgba(200,169,81,.18);transition:transform .25s ease}
+  .sello:hover{transform:scale(1.04)}
+  .sobre small{margin-top:1.1rem;font-size:.9rem;opacity:.7}
+
+  /* ---------- Portada ---------- */
+  .portada{min-height:100svh;background:var(--pino);color:var(--granito);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+  .portada .arriba{padding:3.2rem 1.6rem 0;max-width:560px;margin:0 auto;width:100%}
+  .saludo{font-size:1rem;opacity:.8}
+  .saludo strong{font-weight:600;color:var(--heno)}
+  .nombres{font-family:var(--display);font-weight:400;font-size:clamp(3.6rem,19vw,6.5rem);line-height:.92;margin:1.6rem 0 1.4rem}
+  .nombres span{display:block}
+  .nombres .y{font-size:.42em;color:var(--heno);margin:.25em 0 .15em .1em}
+  .fecha{font-size:1.15rem;max-width:22ch}
+  .cuenta{display:flex;gap:1.4rem;margin-top:2rem}
+  .cuenta div{display:flex;flex-direction:column}
+  .cuenta b{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1}
+  .cuenta span{font-size:.8rem;opacity:.7}
+  .sierra{display:block;width:100%;height:auto;margin-top:2rem}
+
+  /* ---------- Secciones ---------- */
+  main{max-width:560px;margin:0 auto;padding:0 1.6rem 4rem}
+  section{padding:3.2rem 0 1rem}
+  h2{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1.15;color:var(--pino);margin-bottom:1.2rem}
+  .intro{font-size:1.05rem;max-width:40ch}
+
+  /* Lugares */
+  .lugar{border-top:1px solid var(--linea);padding:1.5rem 0}
+  .lugar:last-child{border-bottom:1px solid var(--linea)}
+  .lugar .hora{font-family:var(--display);font-size:1.5rem;color:var(--lago)}
+  .lugar h3{font-family:var(--display);font-weight:400;font-size:1.45rem;margin:.1rem 0 .3rem}
+  .lugar p{color:#46524d;font-size:.97rem}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;margin-top:.9rem;padding:.7rem 1.1rem;border-radius:999px;border:1.5px solid var(--pino);background:transparent;color:var(--pino);text-decoration:none;font-weight:500;font-size:.95rem}
+  .btn.lleno{background:var(--pino);color:var(--granito)}
+  .btn svg{width:18px;height:18px}
+  .fila{display:flex;flex-wrap:wrap;gap:.6rem}
+
+  /* Programa */
+  .programa{list-style:none;position:relative;margin-top:.4rem}
+  .programa::before{content:"";position:absolute;left:3.6rem;top:.6rem;bottom:.6rem;width:1px;background:var(--linea)}
+  .programa li{display:grid;grid-template-columns:3.6rem 1fr;gap:1.4rem;padding:.7rem 0;position:relative}
+  .programa li::after{content:"";position:absolute;left:calc(3.6rem - 4px);top:1.15rem;width:9px;height:9px;border-radius:50%;background:var(--heno)}
+  .programa time{font-family:var(--display);font-size:1.15rem;color:var(--pino);padding-top:.1rem}
+  .programa strong{font-weight:600;display:block}
+  .programa span{font-size:.93rem;color:#56625d}
+
+  /* Autobuses */
+  .bus{background:#fff;border-radius:18px;padding:1.3rem 1.3rem .4rem;margin-top:.4rem}
+  .trayecto{display:grid;grid-template-columns:auto 1fr;gap:.2rem 1rem;padding-bottom:1rem;margin-bottom:1rem;border-bottom:1px solid var(--linea)}
+  .trayecto:last-child{border-bottom:none;margin-bottom:0}
+  .trayecto time{font-family:var(--display);font-size:1.6rem;color:var(--pino);grid-row:span 2;line-height:1.1}
+  .trayecto b{font-weight:600}
+  .trayecto span{font-size:.93rem;color:#56625d}
+
+  /* RSVP */
+  .rsvp{background:var(--pino);color:var(--granito);border-radius:22px;padding:1.8rem 1.4rem;margin-top:3.2rem}
+  .rsvp h2{color:var(--granito)}
+  .rsvp .intro{opacity:.85;margin-bottom:1.4rem}
+  fieldset{border:none;margin-bottom:1.3rem}
+  legend{font-weight:600;margin-bottom:.6rem}
+  .opciones{display:flex;flex-wrap:wrap;gap:.5rem}
+  .opciones label{position:relative}
+  .opciones input{position:absolute;opacity:0;inset:0}
+  .opciones span{display:inline-block;padding:.6rem 1rem;border-radius:999px;border:1.5px solid rgba(238,240,234,.35);font-size:.95rem;transition:background .15s,border-color .15s}
+  .opciones input:checked + span{background:var(--heno);border-color:var(--heno);color:var(--pino);font-weight:600}
+  .opciones input:focus-visible + span{outline:2px solid var(--granito);outline-offset:2px}
+  .contador{display:flex;align-items:center;gap:1rem}
+  .contador button{width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(238,240,234,.4);background:transparent;color:var(--granito);font-size:1.3rem}
+  .contador output{font-family:var(--display);font-size:1.8rem;min-width:1.5ch;text-align:center}
+  .contador small{opacity:.7}
+  textarea{width:100%;min-height:90px;border-radius:14px;border:1.5px solid rgba(238,240,234,.3);background:rgba(255,255,255,.06);color:var(--granito);padding:.8rem 1rem;font:inherit;font-size:.95rem;resize:vertical}
+  textarea::placeholder{color:rgba(238,240,234,.5)}
+  .enviar{width:100%;padding:1rem;border-radius:999px;border:none;background:var(--heno);color:var(--pino);font-weight:600;font-size:1.05rem;margin-top:.4rem}
+  .aviso{margin-top:.8rem;font-size:.9rem;color:#f0c9a8;min-height:1.2em}
+  .gracias{display:none;text-align:center;padding:1rem 0}
+  .gracias h3{font-family:var(--display);font-weight:400;font-size:1.9rem;margin-bottom:.5rem}
+  .gracias button{margin-top:1rem;background:none;border:none;color:var(--heno);text-decoration:underline}
+  .solo-si{display:none}
+  .asiste .solo-si{display:block}
+
+  /* Regalo */
+  .iban{display:flex;justify-content:space-between;align-items:center;gap:1rem;background:#fff;border-radius:14px;padding:1rem 1.1rem;margin-top:1rem;font-size:.98rem;word-break:break-all}
+  .iban button{flex-shrink:0;border:none;background:none;color:var(--pino);font-weight:600;text-decoration:underline}
+
+  footer{text-align:center;padding:2.5rem 1rem 3.5rem;color:#6a756f;font-size:.9rem}
+  footer p:first-child{font-family:var(--display);font-size:1.6rem;color:var(--pino);margin-bottom:.3rem}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- Sobre de entrada: el único momento animado -->
+<div class="sobre" id="sobre" role="dialog" aria-label="Invitación cerrada">
+  <p class="para">Una invitación para</p>
+  <h1 id="nombreSobre">Mante y Moni</h1>
+  <button class="sello" id="abrir" aria-label="Abrir la invitación">E&thinsp;M</button>
+  <small>Toca el sello para abrirla</small>
+</div>
+
+<header class="portada">
+  <div class="arriba">
+    <p class="saludo"><strong id="nombrePortada">Mante y Moni</strong>, <span id="verbo">estáis invitados</span> a nuestra boda</p>
+    <h2 class="nombres" style="color:inherit"><span>Elena</span><span class="y">y</span><span>Moisés</span></h2>
+    <p class="fecha">Sábado 17 de julio de 2027, a las seis de la tarde</p>
+    <div class="cuenta" aria-live="off">
+      <div><b id="cDias">–</b><span>días</span></div>
+      <div><b id="cHoras">–</b><span>horas</span></div>
+      <div><b id="cMin">–</b><span>minutos</span></div>
+    </div>
+  </div>
+  <!-- Silueta de la Sierra de Guadarrama -->
+  <svg class="sierra" viewBox="0 0 400 90" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 70 L30 58 L52 64 L80 40 L96 48 L118 30 L134 42 L150 36 L168 22 L180 34 L196 26 L212 38 L236 30 L258 46 L284 36 L310 52 L336 44 L362 58 L400 50 L400 90 L0 90Z" fill="#2E5247"/>
+    <path d="M0 80 L40 72 L90 78 L140 66 L200 74 L250 64 L310 72 L360 66 L400 72 L400 90 L0 90Z" fill="#EEF0EA"/>
+  </svg>
+</header>
+
+<main>
+
+  <section aria-labelledby="t-donde">
+    <h2 id="t-donde">Dónde</h2>
+    <div class="lugar">
+      <div class="hora">18:00</div>
+      <h3>Parroquia Santa María de Caná</h3>
+      <p>Av. de Europa, 6. Pozuelo de Alarcón</p>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Parroquia+Santa+Mar%C3%ADa+de+Can%C3%A1+Av.+de+Europa+6+Pozuelo+de+Alarc%C3%B3n">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        Ver en el mapa
+      </a>
+    </div>
+    <div class="lugar">
+      <div class="hora">Después</div>
+      <h3>Finca Prados Moros</h3>
+      <p>Ctra. M-600, km 0,2. Guadarrama. Tiene aparcamiento para quien vaya en coche.</p>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Finca+Prados+Moros+Guadarrama">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        Ver en el mapa
+      </a>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-dia">
+    <h2 id="t-dia">El día</h2>
+    <ol class="programa">
+      <li><time>18:00</time><div><strong>Ceremonia</strong><span>Santa María de Caná</span></div></li>
+      <li><time>19:15</time><div><strong>Salida del autobús</strong><span>Desde la puerta de la iglesia</span></div></li>
+      <li><time>20:00</time><div><strong>Cóctel</strong><span>En los jardines de la finca</span></div></li>
+      <li><time>21:30</time><div><strong>Cena</strong><span>Con vistas a la sierra</span></div></li>
+      <li><time>00:00</time><div><strong>Baile y barra libre</strong><span>Hasta que el cuerpo aguante</span></div></li>
+      <li><time>05:00</time><div><strong>Autobuses de vuelta</strong><span>A Moncloa y a Pozuelo</span></div></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="t-bus">
+    <h2 id="t-bus">Autobuses</h2>
+    <p class="intro">La finca está a unos 35 minutos de Madrid. Si venís en autobús, no tenéis que preocuparos por el coche.</p>
+    <div class="bus">
+      <div class="trayecto"><time>19:15</time><b>Iglesia → Finca</b><span>Sale de la puerta de Santa María de Caná</span></div>
+      <div class="trayecto"><time>05:00</time><b>Finca → Moncloa</b><span>Vuelta a Madrid</span></div>
+      <div class="trayecto"><time>05:00</time><b>Finca → Iglesia</b><span>Vuelta a Pozuelo, por si dejasteis allí el coche</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-cal">
+    <h2 id="t-cal">Guárdalo en tu calendario</h2>
+    <div class="fila">
+      <a class="btn lleno" id="gcal" target="_blank" rel="noopener">Google Calendar</a>
+      <button class="btn" id="ics">Apple u Outlook</button>
+    </div>
+  </section>
+
+  <div class="rsvp" id="rsvp">
+    <div id="formRsvp">
+      <h2>¿Venís?</h2>
+      <p class="intro" id="rsvpIntro">Nos ayuda mucho saberlo antes del 1 de junio de 2027.</p>
+
+      <fieldset>
+        <legend>Asistencia</legend>
+        <div class="opciones">
+          <label><input type="radio" name="asiste" value="si"><span id="optSi">Sí, allí estaremos</span></label>
+          <label><input type="radio" name="asiste" value="no"><span id="optNo">No podemos ir</span></label>
+        </div>
+      </fieldset>
+
+      <div class="solo-si">
+        <fieldset id="bloquePersonas">
+          <legend>¿Cuántos vais?</legend>
+          <div class="contador">
+            <button type="button" id="menos" aria-label="Una persona menos">−</button>
+            <output id="personas">2</output>
+            <button type="button" id="mas" aria-label="Una persona más">+</button>
+            <small id="maxTxt">de 2</small>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Autobús de ida (19:15)</legend>
+          <div class="opciones">
+            <label><input type="radio" name="ida" value="si"><span>Lo cogemos</span></label>
+            <label><input type="radio" name="ida" value="no"><span>Vamos por nuestra cuenta</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Autobús de vuelta (05:00)</legend>
+          <div class="opciones">
+            <label><input type="radio" name="vuelta" value="moncloa"><span>A Moncloa</span></label>
+            <label><input type="radio" name="vuelta" value="pozuelo"><span>A Pozuelo</span></label>
+            <label><input type="radio" name="vuelta" value="no"><span>No</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Alergias o menú especial</legend>
+          <textarea id="alergias" placeholder="Por ejemplo: una persona celíaca, un menú vegetariano…"></textarea>
+        </fieldset>
+      </div>
+
+      <button class="enviar" id="enviar">Enviar respuesta</button>
+      <p class="aviso" id="aviso" role="alert"></p>
+    </div>
+
+    <div class="gracias" id="gracias" aria-live="polite">
+      <h3 id="graciasTitulo">¡Respuesta enviada!</h3>
+      <p id="graciasTxt"></p>
+      <button id="cambiar">Cambiar respuesta</button>
+    </div>
+  </div>
+
+  <section aria-labelledby="t-regalo">
+    <h2 id="t-regalo">Regalo</h2>
+    <p class="intro">Lo más importante es que vengáis. Si además queréis tener un detalle con nosotros, esta es nuestra cuenta:</p>
+    <div class="iban"><span id="ibanTxt">ES00 0000 0000 0000 0000 0000</span><button id="copiar">Copiar</button></div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Elena y Moisés</p>
+  <p>¿Dudas? Escríbenos por WhatsApp</p>
+</footer>
+
+<script>
+/* ======================================================
+   INVITADOS
+   Cada link es:  https://tu-web.vercel.app/?i=CODIGO
+   plazas = número máximo de personas de esa invitación
+   plural = true si la invitación es para más de una persona
+   ====================================================== */
+const INVITADOS = {
+  "mm27": { nombre: "Mante y Moni", plazas: 2, plural: true },
+  "lu27": { nombre: "Lucía",        plazas: 1, plural: false },
+  "fg27": { nombre: "Familia García", plazas: 4, plural: true }
+};
+const POR_DEFECTO = "mm27"; // para la prueba; en producción, mostrar un saludo genérico
+
+const codigo = new URLSearchParams(location.search).get("i") || POR_DEFECTO;
+const inv = INVITADOS[codigo] || { nombre: "", plazas: 2, plural: true };
+
+// Personalización de textos
+const nombre = inv.nombre || "Querida familia y amigos";
+document.getElementById("nombreSobre").textContent = nombre;
+document.getElementById("nombrePortada").textContent = nombre;
+if (!inv.plural) {
+  document.getElementById("verbo").textContent = "estás invitada";
+  document.getElementById("optSi").textContent = "Sí, allí estaré";
+  document.getElementById("optNo").textContent = "No puedo ir";
+  document.querySelector("#formRsvp h2").textContent = "¿Vienes?";
+}
+if (inv.plazas === 1) document.getElementById("bloquePersonas").style.display = "none";
+
+// Sobre
+document.getElementById("abrir").addEventListener("click", () => {
+  document.getElementById("sobre").classList.add("abierto");
+  document.getElementById("nombrePortada").focus?.();
+});
+
+// Cuenta atrás (18:00 hora peninsular en verano = 16:00 UTC)
+const BODA = new Date("2027-07-17T16:00:00Z");
+function tic(){
+  let ms = Math.max(0, BODA - new Date());
+  const d = Math.floor(ms / 864e5); ms -= d * 864e5;
+  const h = Math.floor(ms / 36e5);  ms -= h * 36e5;
+  const m = Math.floor(ms / 6e4);
+  cDias.textContent = d; cHoras.textContent = h; cMin.textContent = m;
+}
+tic(); setInterval(tic, 30000);
+
+// Calendario
+const EVENTO = {
+  titulo: "Boda de Elena y Moisés",
+  inicio: "20270717T160000Z",
+  fin: "20270718T030000Z",
+  lugar: "Parroquia Santa María de Caná, Av. de Europa 6, Pozuelo de Alarcón",
+  detalle: "Ceremonia a las 18:00. Después, celebración en la Finca Prados Moros (Guadarrama). Autobús a las 19:15 desde la iglesia."
+};
+document.getElementById("gcal").href =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent(EVENTO.titulo) +
+  "&dates=" + EVENTO.inicio + "/" + EVENTO.fin +
+  "&location=" + encodeURIComponent(EVENTO.lugar) +
+  "&details=" + encodeURIComponent(EVENTO.detalle);
+
+document.getElementById("ics").addEventListener("click", () => {
+  const ics = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//ElenaMoises//Boda//ES","BEGIN:VEVENT",
+    "UID:boda-elena-moises-20270717","DTSTAMP:20260101T000000Z",
+    "DTSTART:" + EVENTO.inicio, "DTEND:" + EVENTO.fin,
+    "SUMMARY:" + EVENTO.titulo,
+    "LOCATION:" + EVENTO.lugar.replace(/,/g, "\\,"),
+    "DESCRIPTION:" + EVENTO.detalle.replace(/,/g, "\\,"),
+    "END:VEVENT","END:VCALENDAR"
+  ].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+  a.download = "boda-elena-moises.ics";
+  a.click();
+});
+
+// RSVP
+const rsvp = document.getElementById("rsvp");
+let personas = inv.plazas;
+const out = document.getElementById("personas");
+out.textContent = personas;
+document.getElementById("maxTxt").textContent = "de " + inv.plazas;
+document.getElementById("menos").onclick = () => { personas = Math.max(1, personas - 1); out.textContent = personas; };
+document.getElementById("mas").onclick   = () => { personas = Math.min(inv.plazas, personas + 1); out.textContent = personas; };
+
+document.querySelectorAll('input[name="asiste"]').forEach(r =>
+  r.addEventListener("change", () => rsvp.classList.toggle("asiste", r.value === "si" && r.checked))
+);
+
+const valor = n => (document.querySelector(`input[name="${n}"]:checked`) || {}).value;
+
+document.getElementById("enviar").addEventListener("click", async () => {
+  const aviso = document.getElementById("aviso");
+  const asiste = valor("asiste");
+  if (!asiste) { aviso.textContent = "Elige si venís o no para poder enviar la respuesta."; return; }
+  if (asiste === "si" && (!valor("ida") || !valor("vuelta"))) {
+    aviso.textContent = "Indica si usaréis el autobús de ida y el de vuelta.";
+    return;
+  }
+  aviso.textContent = "";
+
+  const respuesta = {
+    codigo, nombre: inv.nombre, asiste,
+    personas: asiste === "si" ? personas : 0,
+    busIda: valor("ida") || "", busVuelta: valor("vuelta") || "",
+    alergias: document.getElementById("alergias").value.trim(),
+    fecha: new Date().toISOString()
+  };
+
+  /* Aquí se conectará el envío real (Google Sheets, Formspree o función de Vercel):
+     await fetch("/api/rsvp", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(respuesta) });
+  */
+  console.log("RSVP", respuesta);
+
+  document.getElementById("formRsvp").style.display = "none";
+  document.getElementById("gracias").style.display = "block";
+  document.getElementById("graciasTitulo").textContent =
+    asiste === "si" ? "¡Qué alegría!" : "Os echaremos de menos";
+  document.getElementById("graciasTxt").textContent =
+    asiste === "si"
+      ? `Hemos apuntado ${personas} ${personas === 1 ? "persona" : "personas"}. Nos vemos el 17 de julio.`
+      : "Gracias por avisarnos.";
+});
+
+document.getElementById("cambiar").addEventListener("click", () => {
+  document.getElementById("gracias").style.display = "none";
+  document.getElementById("formRsvp").style.display = "block";
+});
+
+// Copiar cuenta
+document.getElementById("copiar").addEventListener("click", async (e) => {
+  try {
+    await navigator.clipboard.writeText(document.getElementById("ibanTxt").textContent.replace(/\s/g, ""));
+    e.target.textContent = "Copiada";
+  } catch { e.target.textContent = "Cópiala a mano"; }
+  setTimeout(() => e.target.textContent = "Copiar", 2000);
+});
+</script>
+</body>
+</html>
